@@ -1,0 +1,24 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+flake8 = "*"
+coverage = "*"
+black = "==19.3b0"
+
+[packages]
+django = "==2.2.9"
+djangorestframework = "==3.9.1"
+django-filter = "==2.0.0"
+django-cors-headers = "==2.4.0"
+django-environ = "==0.4.5"
+drf-yasg = "==1.17.0"
+packaging = "==19.2"
+whitenoise = "==4.1.2"
+celery = "==4.4.0"
+django-celery-results = "==1.1.2"
+
+[requires]
+python_version = "3.6"

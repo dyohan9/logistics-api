@@ -1,0 +1,13 @@
+[run]
+source =
+    ./core/api
+    ./core/authentication
+    ./core/common
+omit =
+    ./core/api/apps.py
+    ./core/authentication/apps.py
+    ./core/common/apps.py
+    ./core/common/migrations/*
+
+[report]
+fail_under = 90
