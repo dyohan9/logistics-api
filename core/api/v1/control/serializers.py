@@ -1,7 +1,6 @@
-import re
-
 from rest_framework import serializers
 
+from core import celery
 from core.common.models import Router, Map
 
 
@@ -20,11 +19,8 @@ class MapSerializer(serializers.ModelSerializer):
         )
         instance.save()
 
-        for router in logistic:
-            regex = [x.group() for x in re.finditer(r"\S+", router)]
-            Router.objects.create(
-                source=regex[0], destiny=regex[1], distance=regex[2], map=instance
-            )
+        answer_task = celery.app.send_task("map_create", args=[instance.pk, logistic])
+        answer_task.wait()
 
         return instance
 
