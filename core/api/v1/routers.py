@@ -1,5 +1,6 @@
 from rest_framework import routers
 
+from core.api.v1.control.views import RouterViewSet, MapViewSet
 from .account.views import LoginViewSet
 from .account.views import RegisterUserViewSet
 
@@ -80,3 +81,5 @@ class Router(routers.SimpleRouter):
 router = Router()
 router.register("account/login", LoginViewSet)
 router.register("account/register", RegisterUserViewSet)
+router.register("control/router", RouterViewSet)
+router.register("control/map", MapViewSet)
