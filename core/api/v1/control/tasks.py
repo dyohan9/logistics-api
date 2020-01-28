@@ -1,10 +1,10 @@
 import re
 
-from core import celery
+from core.celery import app
 from core.common.models import Router, Map
 
 
-@celery.app.task(name="map_create")
+@app.task(name="map_create")
 def map_create(instance, logistic):
     instance = Map.objects.get(pk=instance)
 

@@ -1,5 +1,7 @@
+from django.utils.translation import gettext as _
 from rest_framework import mixins
 from rest_framework.decorators import action
+from rest_framework.exceptions import APIException
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
@@ -39,7 +41,7 @@ class RouterViewSet(GenericViewSet):
         permission_classes=[],
     )
     def search(self, request, **kwargs):
-        serializer = RouterSerializer(data=request.data)
+        serializer = SearchSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
         map_name = request.data.get("map_name")
@@ -53,20 +55,23 @@ class RouterViewSet(GenericViewSet):
         result = {}
 
         if routers:
-            grafo = Graph()
-            nodes = []
-            for r in routers:
-                if r.source not in nodes:
-                    nodes.append(r.source)
-                if r.destiny not in nodes:
-                    nodes.append(r.destiny)
+            try:
+                grafo = Graph()
+                nodes = []
+                for r in routers:
+                    if r.source not in nodes:
+                        nodes.append(r.source)
+                    if r.destiny not in nodes:
+                        nodes.append(r.destiny)
 
-                grafo.add_edge(r.source, r.destiny, r.distance)
+                    grafo.add_edge(r.source, r.destiny, r.distance)
 
-            grafo.add_node(nodes)
+                grafo.add_node(nodes)
 
-            km, path = grafo.caminho(source, destiny)
+                km, path = grafo.caminho(source, destiny)
 
-            result = {"path": path, "cost": ((liter_value / autonomy) * km)}
+                result = {"path": path, "cost": ((liter_value / autonomy) * km)}
+            except KeyError:
+                raise APIException(detail=_("Router to destiny not exist"))
 
         return Response(result)

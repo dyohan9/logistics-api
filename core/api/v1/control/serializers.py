@@ -1,6 +1,10 @@
 from rest_framework import serializers
 
 from core import celery
+from core.api.v1.control.validators import (
+    MapNameNotExistValidator,
+    LogisticTextValidator,
+)
 from core.common.models import Router, Map
 
 
@@ -12,8 +16,13 @@ class MapSerializer(serializers.ModelSerializer):
 
     logistic_text = serializers.CharField(required=False)
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.validators.append(MapNameNotExistValidator())
+        self.validators.append(LogisticTextValidator())
+
     def create(self, validated_data):
-        logistic = validated_data.pop("logistic_text").split("\n")
+        logistic = validated_data.pop("logistic_text").splitlines()
         instance = self.Meta.model(
             map_name=validated_data.get("map_name"), user=self.context["request"].user
         )
