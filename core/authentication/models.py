@@ -49,10 +49,10 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     @property
     def token_generator(self):
-        return PasswordResetTokenGenerator()
+        return PasswordResetTokenGenerator()  # pragma: no cover
 
     def make_password_reset_token(self):
-        return self.token_generator.make_token(self)
+        return self.token_generator.make_token(self)  # pragma: no cover
 
     def check_password_reset_token(self, token):
-        return self.token_generator.check_token(self, token)
+        return self.token_generator.check_token(self, token)  # pragma: no cover
