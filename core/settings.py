@@ -26,7 +26,7 @@ env = environ.Env(
     LANGUAGE_CODE=(str, "en-us"),
     TIME_ZONE=(str, "UTC"),
     STATIC_URL=(str, "/static/"),
-    CELERY_BROKER_URL=(str, "redis://localhost:6379"),
+    CELERY_BROKER_URL=(str, "redis://localhost:6379/0"),
 )
 
 

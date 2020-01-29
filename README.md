@@ -17,4 +17,5 @@ Você pode definir variáveis de ambiente no seu sistema operacional, gravar no 
 | TIME_ZONE | ```string``` | ```UTC``` | Uma sequência que representa o fuso horário para esta instalação. Veja o [list of time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
 | STATIC_URL | ```string``` | ```/static/``` | URL a ser usada ao se referir a arquivos estáticos localizados em ```STATIC_ROOT```.
 | CSRF_COOKIE_DOMAIN | ```string``` | ```None``` | O domínio a ser usado ao definir o cookie CSRF.
-| CSRF_COOKIE_SECURE | ```boolean``` | ```False``` | Se você deseja usar um cookie seguro para o cookie CSRF. | 
+| CSRF_COOKIE_SECURE | ```boolean``` | ```False``` | Se você deseja usar um cookie seguro para o cookie CSRF.
+| CELERY_BROKER_URL | ```string```  | ``` redis://localhost:6379/0 ``` | URL do Celery Broker, verifique as instruções de uso no Celery Docs. | 
