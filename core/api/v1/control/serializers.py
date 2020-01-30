@@ -6,6 +6,7 @@ from core.api.v1.control.validators import (
     LogisticTextValidator,
 )
 from core.common.models import Router, Map
+from core.api.v1.control.tasks import map_create
 
 
 class MapSerializer(serializers.ModelSerializer):
@@ -28,8 +29,7 @@ class MapSerializer(serializers.ModelSerializer):
         )
         instance.save()
 
-        answer_task = celery.app.send_task("map_create", args=[instance.pk, logistic])
-        answer_task.wait()
+        map_create.delay(instance.pk, logistic)
 
         return instance
 
