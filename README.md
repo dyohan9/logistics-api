@@ -5,7 +5,7 @@
 
 Para começar, agradeço muito a oportunidade que me foi dado para fazer esse teste, foi uma experiência muito boa e bastante desafiador, de cara quando comecei a ler o teste, comecei a perceber que o problema poderia ser resolvido com GRAFO, logo comecei a pesquisar para tentar encontrar a melhor solução para essa abordagem, foi quando lembrei do algoritmo <b>Dijkstra</b>, foi ai que comecei a pesquisar soluções que pudessem me auxiliar nesse processo, encontrei várias soluções, porém nenhuma servia para o meu problema, foi quando acabei encontrando uma que foi desenvolvido pelo usuário <b>vglinden</b>, a partir disso comecei a desenvolver o backend, como atualmente trabalho, somente tive tempo disponível na parte da noite, mesmo assim entrego esse projeto com testes e documentação.
 
-Eu queria poder colocar o Travis-CI e o Coveralls, porém como o repositório é privado, os serviços são gratuitos somente para open-source.
+Eu queria poder colocar o <b>Travis-CI</b> e o <b>Coveralls</b>, porém como o repositório é privado, os serviços são gratuitos somente para open-source.
 
 Disponibilizei a documentação do backend com <b>Swagger</b> e também um arquivo dump do <b>Postman</b>.
 
