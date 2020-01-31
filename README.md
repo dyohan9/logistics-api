@@ -17,7 +17,7 @@ Disponibilizei a documentação do backend com <b>Swagger</b> e também um arqui
 | Postman | [*Clique Aqui*](https://github.com/dyohan9/TestGrupoBR/blob/master/Sistema.postman_collection.json)
 
 
-## Development
+## Desenvolvimento
 
 Use o comando ```make``` para ```check_environment```, ```install_requirements```, ```lint```, ```test```, ```migrate```, ```start```, ```migrations``` and ```collectstatic```.
 
@@ -34,7 +34,7 @@ Use o comando ```make``` para ```check_environment```, ```install_requirements``
 | make collectstatic | Gerar os arquivos estáticos em ```STATIC_ROOT```
 
 
-## Production
+## Produção
 
 ### Requisitos:
 | # | Versão |
