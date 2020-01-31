@@ -1,0 +1,70 @@
+# Attention:
+# Use this docker-compose to:
+# - Up development environment: docker-compose up
+# - Build docker images: docker-compose build
+
+version: '3.6'
+
+services:
+  database:
+      image: postgres
+      networks:
+        - system_network
+      environment:
+        - POSTGRES_USER=${POSTGRES_USER:-core}
+        - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-secret}
+        - POSTGRES_DB=${POSTGRES_DB:-system}
+      volumes:
+        - postgres_volume:/var/lib/postgresql/data
+  redis:
+    image: redis:latest
+    networks:
+      - system_network
+  system:
+    image: system/core:latest
+    build: .
+    ports:
+      - ${BACKEND_EXPORT:-80}:80
+    depends_on:
+      - database
+    networks:
+      - system_network
+    environment:
+      - SECRET_KEY=${SECRET_KEY:-SK}
+      - DEBUG=${DEBUG:-true}
+      - ALLOWED_HOSTS=${ALLOWED_HOSTS:-*}
+      - DEFAULT_DATABASE=${DEFAULT_DATABASE:-postgres://core:secret@database:5432/system}
+      - LANGUAGE_CODE=${LANGUAGE_CODE:-en-us}
+      - TIME_ZONE=${TIME_ZONE:-UTC}
+      - STATIC_URL=${STATIC_URL:-/static/}
+      - CSRF_COOKIE_DOMAIN=${CSRF_COOKIE_DOMAIN}
+      - CSRF_COOKIE_SECURE=${CSRF_COOKIE_SECURE:-false}
+      - CELERY_BROKER_URL=${CELERY_BROKER_URL:-redis://redis:6379/0}
+  celery:
+    build: .
+    entrypoint: "celery worker -A core.celery_app -c 1 -l INFO -E"
+    environment:
+      - SECRET_KEY=${SECRET_KEY:-SK}
+      - DEBUG=${DEBUG:-false}
+      - ALLOWED_HOSTS=${ALLOWED_HOSTS:-*}
+      - DEFAULT_DATABASE=${DEFAULT_DATABASE:-postgres://core:secret@database:5432/system}
+      - LANGUAGE_CODE=${LANGUAGE_CODE:-en-us}
+      - TIME_ZONE=${TIME_ZONE:-UTC}
+      - STATIC_URL=${STATIC_URL:-/static/}
+      - CSRF_COOKIE_DOMAIN=${CSRF_COOKIE_DOMAIN}
+      - CSRF_COOKIE_SECURE=${CSRF_COOKIE_SECURE:-false}
+      - CELERY_BROKER_URL=${CELERY_BROKER_URL:-redis://redis:6379/0}
+    depends_on:
+      - system
+      - database
+    networks:
+      - system_network
+    volumes:
+      - .:/opt/services/djangoapp/src
+
+networks:
+  system_network:
+    driver: bridge
+
+volumes:
+  postgres_volume:
