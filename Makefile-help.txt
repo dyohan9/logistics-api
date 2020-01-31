@@ -1,0 +1,10 @@
+Make commands:
+    make help - Show make commands help
+    make check_environment - Check if all dependencies was installed
+    make install_requirements - Install pip dependencies
+    make lint - Show lint warnings and errors
+    make test - Run unit tests and show coverage report
+    make migrate - Update DB shema, apply migrations
+    make start - Start development web server
+    make migrations - Create DB migrations files
+    make collectstatic - Collects the static files into STATIC_ROOT.

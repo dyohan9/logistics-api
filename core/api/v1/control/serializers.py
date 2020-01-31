@@ -1,12 +1,11 @@
 from rest_framework import serializers
 
-from core import celery
+from core.api.v1.control.tasks import map_create
 from core.api.v1.control.validators import (
     MapNameNotExistValidator,
     LogisticTextValidator,
 )
 from core.common.models import Router, Map
-from core.api.v1.control.tasks import map_create
 
 
 class MapSerializer(serializers.ModelSerializer):
