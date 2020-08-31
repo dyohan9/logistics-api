@@ -1,4 +1,4 @@
-# Sistema de Entrega de Mercadorias - Grupo BR
+# Sistema de Entrega de Mercadorias
 
 [![Python Version](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/)
 
